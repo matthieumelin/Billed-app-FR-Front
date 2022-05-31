@@ -96,6 +96,7 @@ export default class {
   handleEditTicket(e, bill, bills) {
     if (this.counter === undefined || this.id !== bill.id) this.counter = 0;
     if (this.id === undefined || this.id !== bill.id) this.id = bill.id;
+    console.log(this.counter);
     if (this.counter % 2 === 0) {
       bills.forEach((b) => {
         $(`#open-bill${b.id}`).css({ background: "#0D5AE5" });
@@ -155,6 +156,7 @@ export default class {
 
     bills.forEach((bill) => {
       $(`#open-bill${bill.id}`)
+      // evenement de click supprimer
       .off("click")
       .click((e) =>
         this.handleEditTicket(e, bill, bills)
