@@ -43,13 +43,16 @@ export default class {
         .bills()
         .list()
         .then((snapshot) => {
+          // suppression bills null
           const bills = snapshot.filter((bill) => {
             return bill.type !== null;
           });
           // rangement bills dans l'ordre antichronologique
           bills.sort((a, b) => {
             return new Date(b.date) - new Date(a.date);
-          }).map((doc) => {
+          });
+          // conversion statut et date
+          bills.map((doc) => {
             doc.date = formatDate(doc.date);
             doc.status = formatStatus(doc.status);
           });

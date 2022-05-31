@@ -26,12 +26,15 @@ describe("Given I am connected as an employee", () => {
       const root = document.createElement("div");
       root.setAttribute("id", "root");
       document.body.append(root);
+      // mock navigation et chargement page
       const pathname = ROUTES_PATH["Bills"];
       root.innerHTML = ROUTES({ pathname: pathname, loading: true });
       document.getElementById("layout-icon1").classList.add("active-icon");
       document.getElementById("layout-icon2").classList.remove("active-icon");
+      // récupération de l'icône
       await waitFor(() => screen.getByTestId("icon-window"));
       const windowIcon = screen.getByTestId("icon-window");
+      //vérification si l'icône contient la classe active-icon
       const iconActivated = windowIcon.classList.contains("active-icon");
       expect(iconActivated).toBeTruthy();
     });
@@ -50,10 +53,12 @@ describe("Given I am connected as an employee", () => {
   });
   describe("When I am on Bills Page and I click on the icon eye", () => {
     test("Then it should open the modal", () => {
+      // page bills
       const html = BillsUI({
         data: bills,
       });
       document.body.innerHTML = html;
+      // initialisation bills
       const store = null;
       const onNavigate = (pathname) => {
         document.body.innerHTML = ROUTES({ pathname });
@@ -64,12 +69,14 @@ describe("Given I am connected as an employee", () => {
         store,
         localStorage: window.localStorage,
       });
+      // simulation modale
       $.fn.modal = jest.fn();
       const icon = screen.getAllByTestId("icon-eye")[0];
       const handleClickIconEye = jest.fn(() =>
         billsList.handleClickIconEye(icon)
       );
       icon.addEventListener("click", handleClickIconEye);
+      // déclenchement de l'événement
       fireEvent.click(icon);
       expect(handleClickIconEye).toHaveBeenCalled();
       const modale = document.getElementById("modaleFile");
@@ -78,6 +85,7 @@ describe("Given I am connected as an employee", () => {
   });
   describe("When I click on 'Send a new bill' page", () => {
     test("Then I should be sent to 'New bill page'", () => {
+      // page bills
       Object.defineProperty(window, "localStorage", {
         value: localStorageMock,
       });
@@ -92,6 +100,7 @@ describe("Given I am connected as an employee", () => {
       document.body.append(root);
       router();
       window.onNavigate(ROUTES_PATH.Bills);
+      // initialisation bills
       const store = null;
       const billsList = new Bills({
         document,
@@ -99,6 +108,7 @@ describe("Given I am connected as an employee", () => {
         store,
         localStorage: window.localStorage,
       });
+      // fonctionnalité navigation
       const newBill = jest.fn(() => billsList.handleClickNewBill);
       const navigationButton = screen.getByTestId("btn-new-bill");
       navigationButton.addEventListener("click", newBill);
@@ -108,7 +118,7 @@ describe("Given I am connected as an employee", () => {
   });
 });
 
-// test d'intégration GET
+//test d'intégration GET
 describe("Given I am a user connected as Employee", () => {
   describe("When I navigate to Bills page", () => {
     test("fetch bills from mock API GET", () => {
@@ -124,8 +134,10 @@ describe("Given I am a user connected as Employee", () => {
       const root = document.createElement("div");
       root.setAttribute("id", "root");
       document.body.append(root);
+      // mock navigation
       const pathname = ROUTES_PATH["Bills"];
       root.innerHTML = ROUTES({ pathname: pathname, loading: true });
+      //mock bills
       const bills = new Bills({
         document,
         onNavigate,
