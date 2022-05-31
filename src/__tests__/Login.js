@@ -1,7 +1,3 @@
-/**
- * @jest-environment jsdom
- */
-
 import LoginUI from "../views/LoginUI";
 import Login from "../containers/Login.js";
 import { ROUTES } from "../constants/routes";

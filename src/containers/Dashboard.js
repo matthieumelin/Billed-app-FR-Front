@@ -177,9 +177,7 @@ export default class {
           }));
           return bills;
         })
-        .catch((error) => {
-          throw error;
-        });
+        .catch(console.log);
     }
   };
 

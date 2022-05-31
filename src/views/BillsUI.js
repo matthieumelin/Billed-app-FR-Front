@@ -20,14 +20,22 @@ const row = (bill) => {
 };
 
 const rows = (data) => {
-  if (data && data.length) {
-    data.sort((a, b) => {
-      const dateA = Date.parse(a.date);
-      const dateB = Date.parse(b.date);
-      return dateA === dateB ? 0 : dateA < dateB ? 1 : -1;
-    });
-  }
-  return data && data.length ? data.map((bill) => row(bill)).join("") : "";
+  return data && data.length
+    ? data
+        .sort((a, b) => {
+          let dateA = new Date(a.date),
+            dateB = new Date(b.date);
+          return dateB - dateA;
+        })
+        .map((doc) => {
+          return {
+            ...doc,
+            date: formatDate(doc.date),
+          };
+        })
+        .map((bill) => row(bill))
+        .join("")
+    : "";
 };
 
 export default ({ data: bills, loading, error }) => {
