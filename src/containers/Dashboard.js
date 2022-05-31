@@ -98,7 +98,8 @@ export default class {
     if (this.id === undefined || this.id !== bill.id) this.id = bill.id;
     console.log(this.counter);
     if (this.counter % 2 === 0) {
-      bills.forEach((b) => {
+      // remplacement de bills par filteredBills
+      filteredBills(bills, getStatus(this.id)).forEach((b) => {
         $(`#open-bill${b.id}`).css({ background: "#0D5AE5" });
       });
       $(`#open-bill${bill.id}`).css({ background: "#2A2B35" });
