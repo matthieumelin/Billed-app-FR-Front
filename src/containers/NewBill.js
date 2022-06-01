@@ -26,35 +26,28 @@ export default class NewBill {
     const fileExtension = fileName.split(".").pop();
     const formData = new FormData();
     const email = JSON.parse(localStorage.getItem("user")).email;
-    formData.append("file", file);
-    formData.append("email", email);
     const formats = ["jpg", "jpeg", "png"];
 
     // vérification de l'extension
     if (formats.includes(fileExtension)) {
-      this.handleStore(formData, fileName);
+      formData.append("file", file);
+      formData.append("email", email);
+      this.store.bills().create({
+        data: formData,
+        headers: {
+          noContentType: true
+        }
+      }).then(({ fileUrl, key }) => {
+        this.billId = key,
+        this.fileUrl = fileUrl,
+        this.fileName = fileName
+      }).catch(console.log)
     } else {
       inputFile.value = "";
       return alert(
         "Ce type de fichier n'est pas supporté. Veuillez choisir un fichier en format .jpg .jpeg ou .png"
       );
     }
-  };
-  handleStore = (formData, fileName) => {
-    this.store
-      .bills()
-      .create({
-        data: formData,
-        headers: {
-          noContentType: true,
-        },
-      })
-      .then(({ fileUrl, key }) => {
-        this.billdId = key;
-        this.fileUrl = fileUrl;
-        this.fileName = fileName;
-      })
-      .catch((error) => console.error(error));
   };
 
   handleSubmit = (e) => {
