@@ -26,7 +26,6 @@ describe("Given I am connected as an employee", () => {
       const root = document.createElement("div");
       root.setAttribute("id", "root");
       document.body.append(root);
-      // mock navigation et chargement page
       const pathname = ROUTES_PATH["Bills"];
       root.innerHTML = ROUTES({ pathname: pathname, loading: true });
       document.getElementById("layout-icon1").classList.add("active-icon");
@@ -35,8 +34,8 @@ describe("Given I am connected as an employee", () => {
       await waitFor(() => screen.getByTestId("icon-window"));
       const windowIcon = screen.getByTestId("icon-window");
       //vérification si l'icône contient la classe active-icon
-      const iconActivated = windowIcon.classList.contains("active-icon");
-      expect(iconActivated).toBeTruthy();
+      const activeIcon = windowIcon.classList.contains("active-icon");
+      expect(activeIcon).toBeTruthy();
     });
     test("Then bills should be ordered from earliest to latest", () => {
       const html = BillsUI({ data: bills });

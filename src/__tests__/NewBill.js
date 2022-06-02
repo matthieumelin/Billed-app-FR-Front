@@ -5,13 +5,9 @@
 import { fireEvent, screen, waitFor } from "@testing-library/dom";
 import NewBillUI from "../views/NewBillUI.js";
 import NewBill from "../containers/NewBill.js";
-
 import { ROUTES_PATH, ROUTES } from "../constants/routes.js";
 import { localStorageMock } from "../__mocks__/localStorage.js";
-
-import router from "../app/Router.js";
 import BillsUI from "../views/BillsUI.js";
-
 import store from "../__mocks__/store.js";
 import userEvent from "@testing-library/user-event";
 
@@ -119,14 +115,14 @@ describe("Given I am connected as an employee", () => {
       fireEvent.change(input, {
         target: {
           files: [
-            new File(["image.txt"], "image.txt", {
+            new File(["file.pdf"], "file.pdf", {
               type: "image/txt",
             }),
           ],
         },
       });
       expect(handleChangeFile).toHaveBeenCalled();
-      expect(input.files[0].name).toBe("image.txt");
+      expect(input.files[0].name).toBe("file.pdf");
     });
   });
 });
@@ -141,10 +137,10 @@ describe("Given I am a user connected as Employee", () => {
       const inputData = {
         type: "Transports",
         name: "Test",
-        datepicker: "2021-05-26",
-        amount: "100",
-        vat: "10",
-        pct: "19",
+        datepicker: "2022-06-02",
+        amount: " 364",
+        vat: "80",
+        pct: "20",
         commentary: "Test",
         file: new File(["test"], "test.png", { type: "image/png" }),
       };
