@@ -138,7 +138,7 @@ describe("Given I am a user connected as Employee", () => {
         type: "Transports",
         name: "Test",
         datepicker: "2022-06-02",
-        amount: " 364",
+        amount: "364",
         vat: "80",
         pct: "20",
         commentary: "Test",
