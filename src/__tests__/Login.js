@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import LoginUI from "../views/LoginUI";
 import Login from "../containers/Login.js";
 import { ROUTES } from "../constants/routes";
@@ -22,7 +26,6 @@ describe("Given that I am a user on login page", () => {
       expect(screen.getByTestId("form-employee")).toBeTruthy();
     });
   });
-
   describe("When I do fill fields in incorrect format and I click on employee button Login In", () => {
     test("Then It should renders Login page", () => {
       document.body.innerHTML = LoginUI();
@@ -111,9 +114,7 @@ describe("Given that I am a user on login page", () => {
       expect(screen.getAllByText("Mes notes de frais")).toBeTruthy();
     });
   });
-});
 
-describe("Given that I am a user on login page", () => {
   describe("When I do not fill fields and I click on admin button Login In", () => {
     test("Then It should renders Login page", () => {
       document.body.innerHTML = LoginUI();
@@ -132,7 +133,6 @@ describe("Given that I am a user on login page", () => {
       expect(screen.getByTestId("form-admin")).toBeTruthy();
     });
   });
-
   describe("When I do fill fields in incorrect format and I click on admin button Login In", () => {
     test("Then it should renders Login page", () => {
       document.body.innerHTML = LoginUI();
@@ -153,7 +153,6 @@ describe("Given that I am a user on login page", () => {
       expect(screen.getByTestId("form-admin")).toBeTruthy();
     });
   });
-
   describe("When I do fill fields in correct format and I click on admin button Login In", () => {
     test("Then I should be identified as an HR admin in app", () => {
       document.body.innerHTML = LoginUI();
