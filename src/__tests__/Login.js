@@ -176,7 +176,7 @@ describe("Given that I am a user on login page", () => {
 
       const form = screen.getByTestId("form-admin");
 
-      // localStorage should be populated with form data
+      // localStorage doit être rempli avec des données de formulaire
       Object.defineProperty(window, "localStorage", {
         value: {
           getItem: jest.fn(() => null),
@@ -185,7 +185,7 @@ describe("Given that I am a user on login page", () => {
         writable: true,
       });
 
-      // we have to mock navigation to test it
+      // nous devons simuler la navigation pour la tester
       const onNavigate = (pathname) => {
         document.body.innerHTML = ROUTES({ pathname });
       };
