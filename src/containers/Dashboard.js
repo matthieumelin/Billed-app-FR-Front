@@ -98,8 +98,7 @@ export default class {
     if (this.id === undefined || this.id !== bill.id) this.id = bill.id;
     console.log(this.counter);
     if (this.counter % 2 === 0) {
-      // remplacement de bills par filteredBills
-      filteredBills(bills, getStatus(this.id)).forEach((b) => {
+      bills.forEach((b) => {
         $(`#open-bill${b.id}`).css({ background: "#0D5AE5" });
       });
       $(`#open-bill${bill.id}`).css({ background: "#2A2B35" });
@@ -157,7 +156,6 @@ export default class {
 
     bills.forEach((bill) => {
       $(`#open-bill${bill.id}`)
-      // evenement de click supprimer
       .off("click")
       .click((e) =>
         this.handleEditTicket(e, bill, bills)
