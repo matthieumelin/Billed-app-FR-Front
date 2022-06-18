@@ -156,6 +156,7 @@ export default class {
 
     bills.forEach((bill) => {
       $(`#open-bill${bill.id}`)
+      // evenement supprimer click
       .off("click")
       .click((e) =>
         this.handleEditTicket(e, bill, bills)
